@@ -1,0 +1,9 @@
+# PDF 由 iCloud 同步，不进 git（体积大，部分论文的许可也不允许再分发）
+papers/
+
+# Obsidian 的窗口布局和缓存，每台设备都不同
+.obsidian/workspace*.json
+.obsidian/cache
+.trash/
+
+.DS_Store

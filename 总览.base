@@ -1,0 +1,94 @@
+filters:
+  or:
+    - file.hasTag("paper")
+    - file.hasTag("project")
+properties:
+  note.org:
+    displayName: 公司
+  note.id:
+    displayName: "#"
+  note.short:
+    displayName: 简称
+  note.date:
+    displayName: 日期
+  note.category:
+    displayName: 分类
+  note.source:
+    displayName: 来源
+  note.status:
+    displayName: 状态
+  note.rating:
+    displayName: 评分
+  note.pdf:
+    displayName: PDF
+views:
+  - type: table
+    name: 全部论文
+    filters:
+      and:
+        - file.hasTag("paper")
+    groupBy:
+      property: note.org
+      direction: ASC
+    order:
+      - note.id
+      - note.short
+      - note.date
+      - note.category
+      - note.source
+      - note.status
+      - note.rating
+      - note.pdf
+    sort:
+      - property: note.id
+        direction: ASC
+  - type: table
+    name: 按分类
+    filters:
+      and:
+        - file.hasTag("paper")
+    groupBy:
+      property: note.category
+      direction: ASC
+    order:
+      - note.org
+      - note.short
+      - note.date
+      - note.source
+      - note.status
+      - note.rating
+    sort:
+      - property: note.date
+        direction: ASC
+  - type: table
+    name: 待读
+    filters:
+      and:
+        - file.hasTag("paper")
+        - 'note.status != "已读"'
+    order:
+      - note.org
+      - note.id
+      - note.short
+      - note.category
+      - note.status
+      - note.pdf
+    sort:
+      - property: note.date
+        direction: DESC
+  - type: table
+    name: 暂无 PDF 的项目
+    filters:
+      and:
+        - file.hasTag("project")
+    groupBy:
+      property: note.org
+      direction: ASC
+    order:
+      - file.name
+      - note.date
+      - note.category
+      - note.status
+    sort:
+      - property: note.date
+        direction: ASC
