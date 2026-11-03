@@ -4,7 +4,7 @@ filters:
     - file.hasTag("project")
 properties:
   note.org:
-    displayName: 公司
+    displayName: 公司 / 专题
   note.id:
     displayName: "#"
   note.short:
@@ -21,6 +21,10 @@ properties:
     displayName: 评分
   note.pdf:
     displayName: PDF
+  note.venue:
+    displayName: 发表
+  note.semantic:
+    displayName: 语义高斯
 views:
   - type: table
     name: 全部论文
@@ -91,4 +95,25 @@ views:
       - note.status
     sort:
       - property: note.date
+        direction: ASC
+  - type: table
+    name: 语义3DGS与具身导航
+    filters:
+      and:
+        - file.hasTag("paper")
+        - 'note.org == "专题·语义3DGS与具身导航"'
+    groupBy:
+      property: note.category
+      direction: ASC
+    order:
+      - note.id
+      - note.short
+      - note.date
+      - note.venue
+      - note.semantic
+      - note.status
+      - note.rating
+      - note.pdf
+    sort:
+      - property: note.id
         direction: ASC

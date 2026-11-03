@@ -1,4 +1,4 @@
-// 把各公司文件夹 papers/ 里 PDF 上的高亮、下划线、手绘标记和批注，写进同一公司 notes/ 里对应笔记的"原文摘录"部分。
+// 把 PDF 上的高亮、下划线、手绘标记和批注，写进各公司或专题文件夹 notes/ 里对应笔记的"原文摘录"部分（笔记的 pdf 属性指向哪个 PDF 就读哪个）。
 //
 // 用法（在 Mac 的终端里，先 cd 到笔记库文件夹）：
 //   swift scripts/extract_highlights.swift            处理全部笔记
@@ -45,10 +45,20 @@ func lineRects(of a: PDFAnnotation) -> [CGRect] {
         let xs = pts.map(\.x), ys = pts.map(\.y)
         let raw = CGRect(x: xs.min()!, y: ys.min()!, width: xs.max()! - xs.min()!, height: ys.max()! - ys.min()!)
         let rel = raw.offsetBy(dx: a.bounds.minX, dy: a.bounds.minY)
-        let r = area.contains(CGPoint(x: rel.midX, y: rel.midY)) ? rel : raw
-        rects.append(r.insetBy(dx: 0, dy: r.height * 0.25))
+        rects.append(area.contains(CGPoint(x: rel.midX, y: rel.midY)) ? rel : raw)
     }
     return rects
+}
+
+// 先把每行的框上下各收窄一点，避免带上相邻行的字。行框很矮、或页面里叠着零散文字时，
+// 收窄后可能只选到几个字，这时逐步放宽，直到选到的字数接近整个框的六成以上。
+func lineText(on page: PDFPage, in r: CGRect) -> String {
+    let full = text(on: page, in: r)
+    for inset in [0.25, 0.1] {
+        let t = text(on: page, in: r.insetBy(dx: 0, dy: r.height * inset))
+        if !t.isEmpty && t.count * 10 >= full.count * 6 { return t }
+    }
+    return full
 }
 
 func items(in doc: PDFDocument) -> [Item] {
@@ -62,7 +72,7 @@ func items(in doc: PDFDocument) -> [Item] {
             switch a.type ?? "" {
             case "Highlight", "Underline", "StrikeOut", "Squiggly":
                 let rects = lineRects(of: a)
-                t = rects.isEmpty ? text(on: page, in: a.bounds) : rects.map { text(on: page, in: $0) }.joined(separator: " ")
+                t = rects.isEmpty ? text(on: page, in: a.bounds) : rects.map { lineText(on: page, in: $0) }.filter { !$0.isEmpty }.joined(separator: " ")
             case "Ink":
                 t = text(on: page, in: a.bounds)
                 approximate = true
@@ -102,16 +112,18 @@ func render(_ items: [Item], pdf: String) -> String {
     return blocks.isEmpty ? "" : "共 \(blocks.count) 条\n\n" + blocks.joined(separator: "\n\n")
 }
 
-// 笔记库下每个公司文件夹里的 notes/
+// 笔记库下每个公司或专题文件夹里的 notes/，包括其中的子文件夹（如 topics/notes/语义3DGS与具身导航/）
 let fm = FileManager.default
 let orgs = (try? fm.contentsOfDirectory(at: vault, includingPropertiesForKeys: nil)) ?? []
 let files = orgs.flatMap { org in
-    (try? fm.contentsOfDirectory(at: org.appendingPathComponent("notes"), includingPropertiesForKeys: nil)) ?? []
+    (fm.enumerator(at: org.appendingPathComponent("notes"), includingPropertiesForKeys: nil)?.allObjects as? [URL]) ?? []
 }
 var updated = 0, unchanged = 0
 for url in files.sorted(by: { $0.path < $1.path }) where url.pathExtension == "md" {
-    let org = url.deletingLastPathComponent().deletingLastPathComponent().lastPathComponent
-    let name = org + "/" + url.deletingPathExtension().lastPathComponent
+    // 显示名去掉 notes 这一层：xsquare/09_HOST、topics/语义3DGS与具身导航/1-01_GaussNav
+    var parts = Array(url.deletingPathExtension().pathComponents.dropFirst(vault.pathComponents.count))
+    if let i = parts.firstIndex(of: "notes") { parts.remove(at: i) }
+    let name = parts.joined(separator: "/")
     if let f = filter, !name.hasPrefix(f), !url.lastPathComponent.hasPrefix(f) { continue }
     guard let note = try? String(contentsOf: url, encoding: .utf8),
           let pdf = pdfPath(in: note),
