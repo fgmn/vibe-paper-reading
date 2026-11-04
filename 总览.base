@@ -32,19 +32,19 @@ views:
       and:
         - file.hasTag("paper")
     groupBy:
-      property: note.org
+      property: org
       direction: ASC
     order:
-      - note.id
-      - note.short
-      - note.date
-      - note.category
-      - note.source
-      - note.status
-      - note.rating
-      - note.pdf
+      - id
+      - short
+      - date
+      - category
+      - source
+      - status
+      - rating
+      - pdf
     sort:
-      - property: note.id
+      - property: id
         direction: ASC
   - type: table
     name: 按分类
@@ -52,33 +52,33 @@ views:
       and:
         - file.hasTag("paper")
     groupBy:
-      property: note.category
+      property: category
       direction: ASC
     order:
-      - note.org
-      - note.short
-      - note.date
-      - note.source
-      - note.status
-      - note.rating
+      - org
+      - short
+      - date
+      - source
+      - status
+      - rating
     sort:
-      - property: note.date
+      - property: date
         direction: ASC
   - type: table
     name: 待读
     filters:
       and:
         - file.hasTag("paper")
-        - 'note.status != "已读"'
+        - note.status != "已读"
     order:
-      - note.org
-      - note.id
-      - note.short
-      - note.category
-      - note.status
-      - note.pdf
+      - org
+      - id
+      - short
+      - category
+      - status
+      - pdf
     sort:
-      - property: note.date
+      - property: date
         direction: DESC
   - type: table
     name: 暂无 PDF 的项目
@@ -86,34 +86,34 @@ views:
       and:
         - file.hasTag("project")
     groupBy:
-      property: note.org
+      property: org
       direction: ASC
     order:
       - file.name
-      - note.date
-      - note.category
-      - note.status
+      - date
+      - category
+      - status
     sort:
-      - property: note.date
+      - property: date
         direction: ASC
   - type: table
     name: 语义3DGS与具身导航
     filters:
       and:
         - file.hasTag("paper")
-        - 'note.org == "专题·语义3DGS与具身导航"'
+        - note.org == "专题·语义3DGS与具身导航"
     groupBy:
-      property: note.category
+      property: category
       direction: ASC
     order:
-      - note.id
-      - note.short
-      - note.date
-      - note.venue
-      - note.semantic
-      - note.status
-      - note.rating
-      - note.pdf
+      - id
+      - short
+      - date
+      - venue
+      - semantic
+      - status
+      - rating
+      - pdf
     sort:
-      - property: note.id
+      - property: id
         direction: ASC
