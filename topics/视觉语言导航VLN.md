@@ -2,19 +2,19 @@
 title: 视觉语言导航（VLN）
 tags: [topic]
 anchor_arxiv: ["2305.16986", "2407.12366", "2610.10787"]
-paper_count: 132
-updated: 2026-11-04
+paper_count: 134
+updated: 2026-11-09
 ---
 
 # 视觉语言导航（VLN）
 
 > [!info] 这份清单怎么来的
-> 以 NavGPT 系列（[NavGPT](https://arxiv.org/abs/2305.16986)、[NavGPT-2](https://arxiv.org/abs/2407.12366)、[NavGPT-3](https://arxiv.org/abs/2610.10787)）为线索，收集视觉语言导航（按语言指令在环境里走到目标）的相关工作，共 132 篇，分五节。
+> 以 NavGPT 系列（[NavGPT](https://arxiv.org/abs/2305.16986)、[NavGPT-2](https://arxiv.org/abs/2407.12366)、[NavGPT-3](https://arxiv.org/abs/2610.10787)）为线索，收集视觉语言导航（按语言指令在环境里走到目标）的相关工作，共 134 篇，分五节。
 > - 检索时间 2026-11-04，来源是 Hugging Face 论文搜索、arXiv API、GitHub 上的 awesome-VLN 列表和网页搜索。VLN 论文很多，这里收的是各方向的代表作和 2025–2026 年的新工作，不是穷尽列表。
 > - 每篇都对照 arXiv 页面核对过标题和首版日期；"做了什么"依据的摘要原句都在摘要里找到了，"摘要里的关键数字"一栏的每个数字也都出现在摘要中。
 > - 发表信息只在 arXiv 备注、项目主页或官方代码仓库写明时才填，"—"表示只有预印本或没找到。"环境"里，离散指 R2R 这类在预设节点间跳转，连续指 VLN-CE 这类在仿真里自由移动。
 > - 每节按首版日期排序。"做了什么"是 Claude 根据摘要写的一句话，读原文时请核对。
-> - PDF 在 `topics/papers/视觉语言导航VLN/`，文件名开头的"节号-序号"和表格顺序一致；下载的是 2026-11-04 时 arXiv 上的最新版本，只存在本地，不进 git。
+> - PDF 在 `topics/papers/视觉语言导航VLN/`，文件名开头的"节号-序号"和表格顺序一致（2026-11-09 补充的 NavSpace、VTInstructor 编号接在第四节末尾，为 4-34、4-35）；下载的是当时 arXiv 上的最新版本，只存在本地，不进 git。
 
 ## 建议的阅读顺序
 
@@ -41,7 +41,7 @@ updated: 2026-11-04
 | [[#一、NavGPT 系列]] | 3 |
 | [[#二、零样本大模型智能体与分层系统]] | 26 |
 | [[#三、训练出来的大模型导航模型]] | 39 |
-| [[#四、任务、基准与数据]] | 33 |
+| [[#四、任务、基准与数据]] | 35 |
 | [[#五、经典方法（大模型之前）]] | 31 |
 
 ## 一、NavGPT 系列
@@ -157,6 +157,7 @@ VLN 评测用的任务和数据集，以及新设定（长程、对话、人群�
 | 2022-10 | [**IVLN**](https://arxiv.org/abs/2210.03087)<br>Iterative Vision-and-Language Navigation | CVPR 2023 | 多种 | 提出迭代式 VLN：智能体在持久环境中连续执行多达 100 条 R2R 指令并保留记忆，发布离散/连续 IR2R。 | about 400 tours each in 80 indoor scenes | [[topics/papers/视觉语言导航VLN/4-09_2210.03087_IVLN.pdf\|PDF]] · [代码](https://github.com/Bill1235813/IVLN) · [主页](https://jacobkrantz.github.io/ivln) |
 | 2024-06 | [**HA-VLN**](https://arxiv.org/abs/2406.19236)<br>Human-Aware Vision-and-Language Navigation: Bridging Simulation to Reality with Dynamic Human Interactions | NeurIPS 2024 D&B Track | 离散 | 在 Matterport3D 中加入动态人类活动，构建 HA3D 模拟器与 HA-R2R 数据集，研究人群场景 VLN。 | — | [[topics/papers/视觉语言导航VLN/4-10_2406.19236_HA-VLN.pdf\|PDF]] · [代码](https://github.com/lpercc/HA3D_simulator) · [主页](https://lpercc.github.io/HA3D_simulator/) |
 | 2024-12 | [**LH-VLN**](https://arxiv.org/abs/2412.09082)<br>Towards Long-Horizon Vision-Language Navigation: Platform, Benchmark and Method | CVPR 2025 | 连续 | 提出长程多阶段 VLN 任务，配套自动数据生成平台 NavGen、LHPR-VLN 基准与细粒度子任务指标。 | 3,260 tasks with an average of 150 task steps | [[topics/papers/视觉语言导航VLN/4-11_2412.09082_LH-VLN.pdf\|PDF]] · [代码](https://github.com/HCPLab-SYSU/LH-VLN) · [主页](https://hcplab-sysu.github.io/LH-VLN/) |
+| 2025-10 | [**NavSpace**](https://arxiv.org/abs/2510.08173)<br>How Navigation Agents Follow Spatial Intelligence Instructions | ICRA 2026 | 连续 | 评测导航智能体空间感知与推理能力的基准（Habitat 3.0 + HM3D 场景），6 类任务，评测 22 个导航智能体，并提出空间智能导航模型 SNav 做了真机测试。 | 1,228 trajectory-instruction pairs; 22 navigation agents evaluated | [[topics/papers/视觉语言导航VLN/4-34_2510.08173_NavSpace.pdf\|PDF]] · [主页](https://navspace.github.io/) |
 | 2025-12 | [**VLNVerse**](https://arxiv.org/abs/2512.19021)<br>A Benchmark for Vision-Language Navigation with Versatile, Embodied, Realistic Simulation and Evaluation | — | 连续 | 构建带物理引擎与全运动学的大规模可扩展 VLN 基准，把多种碎片化 VLN 任务统一评测。 | — | [[topics/papers/视觉语言导航VLN/4-12_2512.19021_VLNVerse.pdf\|PDF]] · [代码](https://github.com/william13077/IAmGoodNavigator) · [主页](https://sihaoevery.github.io/vlnverse) |
 | 2025-12 | [**VL-LN Bench**](https://arxiv.org/abs/2512.22342)<br>Towards Long-horizon Goal-oriented Navigation with Active Dialogs | — | 连续 | 提出交互式实例目标导航：智能体可边找边向 oracle 提问消歧，发布 4.1 万条长程对话轨迹基准。 | over 41k collected long-horizon dialog-augmented trajectories | [[topics/papers/视觉语言导航VLN/4-13_2512.22342_VL-LN-Bench.pdf\|PDF]] · [代码](https://github.com/InternRobotics/VL-LN) · [主页](https://0309hws.github.io/VL-LN.github.io/) |
 | 2026-04 | [**VLN-NF**](https://arxiv.org/abs/2604.10533)<br>Feasibility-Aware Vision-and-Language Navigation with False-Premise Instructions | ACL 2026 | 离散 | 提出虚假前提指令基准：目标不在指定房间，智能体需探索取证后输出 NOT-FOUND，并配 REV-SPL 指标。 | — | [[topics/papers/视觉语言导航VLN/4-14_2604.10533_VLN-NF.pdf\|PDF]] · [主页](https://vln-nf.github.io/) |
@@ -171,6 +172,7 @@ VLN 评测用的任务和数据集，以及新设定（长程、对话、人群�
 | 2024-12 | [**SRDF**](https://arxiv.org/abs/2412.08467)<br>Bootstrapping Language-Guided Navigation Learning with Self-Refining Data Flywheel | — | 离散 | 提出自精炼数据飞轮 SRDF：指令生成器与导航器迭代互相筛选、改进数据池，无需人工标注即可产出高质量导航数据。 | from 70% to 78% SPL on the classic R2R test set, surpassing human performance (76%); SPICE from 23.5 to 26.2 | [[topics/papers/视觉语言导航VLN/4-18_2412.08467_SRDF.pdf\|PDF]] · [代码](https://github.com/wz0919/VLN-SRDF) |
 | 2024-12 | [**RoomTour3D**](https://arxiv.org/abs/2412.08591)<br>Geometry-Aware Video-Instruction Tuning for Embodied Navigation | CVPR 2025 | 离散 | 对网络房间巡游视频做 3D 重建得到人类行走轨迹并生成开放式指令，构建视频-指令数据集 RoomTour3D。 | ~100K open-ended description-enriched trajectories with ~200K instructions, and 17K action-enriched trajectories from 1847 room tour environments | [[topics/papers/视觉语言导航VLN/4-19_2412.08591_RoomTour3D.pdf\|PDF]] · [代码](https://github.com/roomtour3d/roomtour3d-NaviLLM) · [主页](https://roomtour3d.github.io/) |
 | 2025-02 | [**NavRAG**](https://arxiv.org/abs/2502.11142)<br>Generating User Demand Instructions for Embodied Navigation through Retrieval-Augmented LLM | — | 离散 | 用 LLM 构建层次化场景描述树，模拟不同用户需求做检索增强生成，产出贴近真实用户表达的需求式导航指令。 | over 2 million navigation instructions across 861 scenes | [[topics/papers/视觉语言导航VLN/4-20_2502.11142_NavRAG.pdf\|PDF]] · [代码](https://github.com/MrZihan/NavRAG) |
+| 2026-08 | [**VTInstructor**](https://arxiv.org/abs/2608.15284)<br>Visual Trajectory Prompting for Navigation Instruction Generation in Continuous Environments | ACM MM 2026 | 连续 | 首个连续环境下的 VLN 指令生成框架：把长 RGB 轨迹压缩成关键帧，叠加路径、转弯和终点的视觉提示再生成指令，可用来扩充训练数据。 | +0.357 / +0.109 CIDEr over the strongest baseline on R2R-CE / RxR-CE Val Unseen; frozen follower SR 63.3%; +3 SR from data augmentation | [[topics/papers/视觉语言导航VLN/4-35_2608.15284_VTInstructor.pdf\|PDF]] |
 
 ### 真机与sim-to-real
 
