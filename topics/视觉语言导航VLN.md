@@ -2,19 +2,19 @@
 title: 视觉语言导航（VLN）
 tags: [topic]
 anchor_arxiv: ["2305.16986", "2407.12366", "2610.10787"]
-paper_count: 134
-updated: 2026-11-09
+paper_count: 135
+updated: 2026-11-11
 ---
 
 # 视觉语言导航（VLN）
 
 > [!info] 这份清单怎么来的
-> 以 NavGPT 系列（[NavGPT](https://arxiv.org/abs/2305.16986)、[NavGPT-2](https://arxiv.org/abs/2407.12366)、[NavGPT-3](https://arxiv.org/abs/2610.10787)）为线索，收集视觉语言导航（按语言指令在环境里走到目标）的相关工作，共 134 篇，分五节。
+> 以 NavGPT 系列（[NavGPT](https://arxiv.org/abs/2305.16986)、[NavGPT-2](https://arxiv.org/abs/2407.12366)、[NavGPT-3](https://arxiv.org/abs/2610.10787)）为线索，收集视觉语言导航（按语言指令在环境里走到目标）的相关工作，共 135 篇，分五节。
 > - 检索时间 2026-11-04，来源是 Hugging Face 论文搜索、arXiv API、GitHub 上的 awesome-VLN 列表和网页搜索。VLN 论文很多，这里收的是各方向的代表作和 2025–2026 年的新工作，不是穷尽列表。
 > - 每篇都对照 arXiv 页面核对过标题和首版日期；"做了什么"依据的摘要原句都在摘要里找到了，"摘要里的关键数字"一栏的每个数字也都出现在摘要中。
 > - 发表信息只在 arXiv 备注、项目主页或官方代码仓库写明时才填，"—"表示只有预印本或没找到。"环境"里，离散指 R2R 这类在预设节点间跳转，连续指 VLN-CE 这类在仿真里自由移动。
 > - 每节按首版日期排序。"做了什么"是 Claude 根据摘要写的一句话，读原文时请核对。
-> - PDF 在 `topics/papers/视觉语言导航VLN/`，文件名开头的"节号-序号"和表格顺序一致（2026-11-09 补充的 NavSpace、VTInstructor 编号接在第四节末尾，为 4-34、4-35）；下载的是当时 arXiv 上的最新版本，只存在本地，不进 git。
+> - PDF 在 `topics/papers/视觉语言导航VLN/`，文件名开头的"节号-序号"和表格顺序一致（2026-11-09 补充的 NavSpace、VTInstructor 编号接在第四节末尾，为 4-34、4-35；2026-11-11 补充的 Compass 1 为 3-40）；下载的是当时 arXiv 上的最新版本，只存在本地，不进 git。
 
 ## 建议的阅读顺序
 
@@ -40,7 +40,7 @@ updated: 2026-11-09
 |---|---|
 | [[#一、NavGPT 系列]] | 3 |
 | [[#二、零样本大模型智能体与分层系统]] | 26 |
-| [[#三、训练出来的大模型导航模型]] | 39 |
+| [[#三、训练出来的大模型导航模型]] | 40 |
 | [[#四、任务、基准与数据]] | 35 |
 | [[#五、经典方法（大模型之前）]] | 31 |
 
@@ -132,6 +132,7 @@ updated: 2026-11-09
 | 2026-10 | [**SimpleVLN**](https://arxiv.org/abs/2610.23203)<br>Towards Simple and Frontier Vision-Language Navigation | — | 视频/多模态大模型导航<br>连续 | 不改MLLM架构，用定长全局-局部记忆、动作块输出与IL→DAgger→RL渐进训练释放原生MLLM导航能力。 | R2R-CE 76.7% SR, RxR-CE 80.1% SR | [[topics/papers/视觉语言导航VLN/3-37_2610.23203_SimpleVLN.pdf\|PDF]] · [代码](https://github.com/simplevln/SimpleVLN) · [主页](https://simplevln.github.io/) |
 | 2026-10 | [**HAVANA**](https://arxiv.org/abs/2610.24122)<br>A Hierarchical Video-Action Model for Vision-Language Navigation | — | VLA与双系统<br>连续 | 双系统视频-动作模型：慢系统从历史生成语言条件潜在计划，快系统结合最新计划与当前观测异步出局部轨迹，推理时不生成视频。 | — | [[topics/papers/视觉语言导航VLN/3-38_2610.24122_HAVANA.pdf\|PDF]] · [代码](https://github.com/Anastasiawd/HAVANA) |
 | 2026-10 | [**MemVLN**](https://arxiv.org/abs/2610.35066)<br>Streaming Episodic Memory for Vision-Language Navigation | — | 3D/空间表示与记忆<br>连续 | VLM流式导航的情景记忆：维护带时间戳与相对位姿的有界压缩特征库，经交叉注意力产出紧凑记忆token。 | Physical held-out episodes: success 17% -> 40% over VLM baseline, 47% after post-training | [[topics/papers/视觉语言导航VLN/3-39_2610.35066_MemVLN.pdf\|PDF]] · [代码](https://github.com/MemVLN/MemVLN) · [主页](https://memvln.github.io/) |
+| 2026-11 | [**Compass 1**](https://arxiv.org/abs/2611.12087)<br>Towards Open-World and Persistent Embodied Navigation from Monocular RGB Videos | — | 导航基础模型<br>多种 | 统一语言理解与视频生成的导航基础模型：用稀疏关键帧加显式历史地图保留近 2 分钟视觉历史，配结构化问答监督做长程记忆回溯；开源 500+ 小时真实交互和 2,000+ 小时标注网络视频。 | overall success rate 79.4% vs 17.8% for the strongest baseline; persistent history backtracking 0% → 58% | [[topics/papers/视觉语言导航VLN/3-40_2611.12087_Compass-1.pdf\|PDF]] |
 
 ## 四、任务、基准与数据
 
