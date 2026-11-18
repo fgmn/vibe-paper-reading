@@ -9,7 +9,7 @@ category: "世界模型"
 source: "MirroS 技术报告"
 partners: []
 authors: ["MirroS Team"]
-arxiv: ""
+arxiv: "2610.12374"
 pdf: "[[mirros/papers/01_AgentGarten.pdf]]"
 code: "https://github.com/MirroS-Lab/AgentGarten"
 project: "https://mirros-lab.github.io/agent-garten/"
@@ -24,8 +24,9 @@ tags: ["paper", "mirros", "world-model", "neural-rendering", "code-world", "self
 # AgentGarten: Code Worlds for Evolving Agents
 
 > [!info] 报告信息
-> MirroS 技术报告，没有 arXiv · 报告日期 2026-10-08（项目页 BibTeX 写 2026 年 9 月，博客和报告写 10 月 8 日，`date` 取报告）
-> 作者只署 "MirroS Team"，没有个人名字和单位
+> MirroS 技术报告 · 报告日期 2026-10-08（项目页 BibTeX 写 2026 年 9 月，博客和报告写 10 月 8 日，`date` 取报告）
+> 作者：本地报告 PDF 只署 "MirroS Team"；同一工作后来也发在 arXiv [2610.12374](https://arxiv.org/abs/2610.12374)（v1 2026-10-08，v2 2026-10-10），署 15 位个人作者：Jiawei Chi、Shangchen Miao、Zhiyuan Shi … Jialong Wu、Fangfu Liu（2026-11-18 补记；arXiv 版和本地 PDF 是否有内容差异未核对）
+> 相关专题：[[topics/代码世界模型与神经渲染|代码世界模型与神经渲染]]（一、代码世界 + 视频渲染器）
 > PDF：[[mirros/papers/01_AgentGarten.pdf|本地 PDF]]（26 页：正文 17 页 + 参考文献 + 附录 A–D）
 > [项目页](https://mirros-lab.github.io/agent-garten/) · [博客](https://mirros.ai/blog/worlds-for-evolving-agents) · [代码](https://github.com/MirroS-Lab/AgentGarten) · [报告 PDF](https://mirros.ai/report/agent-garten.pdf)
 > 相关专题：[[topics/递归自我改进RSI|递归自我改进RSI]]（四、技能/反思积累；五、环境与课程生成）
