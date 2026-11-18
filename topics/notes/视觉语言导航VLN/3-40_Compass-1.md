@@ -191,7 +191,7 @@ HBN 目前没有仿真基准，所以没有仿真结果。
   - AwareVLN（CVPR 2026）：推理 / 动作模式切换，真机里最强的基线（17.8%）。
   - WNM-3D：视频与动作联合生成的世界导航模型，和 Compass 1 最像的"视频生成派"，但把全部历史帧直接塞进骨干。
   - NaVIDA：逆动力学增强。
-- **单目视频大模型导航的谱系**：[NaVid](https://arxiv.org/abs/2402.15852)（3-03）→ [Uni-NaVid](https://arxiv.org/abs/2412.06224)（3-06）→ [NaVILA](https://arxiv.org/abs/2412.04453)（3-05）→ [StreamVLN](https://arxiv.org/abs/2507.05240)（3-15）。Compass 1 批评的"全部历史帧"和"启发式压缩"主要指这一类。
+- **单目视频大模型导航的谱系**：[NaVid](https://arxiv.org/abs/2402.15852)（3-03）→ [Uni-NaVid](https://arxiv.org/abs/2412.06224)（3-06）→ [NaVILA](https://arxiv.org/abs/2412.04453)（3-05）→ [StreamVLN](https://arxiv.org/abs/2507.05240)（3-15，[[topics/notes/视觉语言导航VLN/3-15_StreamVLN|笔记]]）。Compass 1 批评的"全部历史帧"和"启发式压缩"主要指这一类。
 - **同期的历史 / 记忆方案，可以对照看**：
   - [MemVLN](https://arxiv.org/abs/2610.35066)（3-39）：带时间戳和相对位姿的压缩特征库 + 交叉注意力，要改结构；Compass 1 是不改结构、把历史画成图。
   - [MapNav](https://arxiv.org/abs/2502.13451)（3-07）、MemoryVLN：显式地图 / 记忆库作为额外输入，Compass 1 认为没有显式监督模型就会忽略它们，这正是它加 VQA 的理由。
