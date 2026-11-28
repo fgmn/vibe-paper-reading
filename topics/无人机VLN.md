@@ -1,18 +1,19 @@
 ---
 title: 无人机视觉语言导航（UAV VLN）
 tags: [topic]
-paper_count: 103
-updated: 2026-11-05
+paper_count: 105
+updated: 2026-11-28
 ---
 
 # 无人机视觉语言导航（UAV VLN）
 
 > [!info] 这份清单怎么来的
-> 收集按语言指令飞行的无人机导航（空中 VLN）及相邻任务的工作，共 103 篇，分五节；第六节对比各基准使用的场景。
+> 收集按语言指令飞行的无人机导航（空中 VLN）及相邻任务的工作，共 105 篇，分五节；第六节对比各基准使用的场景。
 > - 检索时间 2026-11-05，来源是 Hugging Face 论文搜索、arXiv API、GitHub 上的 awesome 列表和网页搜索，并合并了 VLN、3DGS、RSI 三个专题里已有的无人机论文。不是穷尽列表。
 > - 每篇都对照 arXiv 页面核对过标题和首版日期；"做了什么"依据的摘要原句都在摘要里找到了，"摘要里的关键数字"一栏的每个数字也都出现在摘要中。
 > - 发表信息只在 arXiv 备注、项目主页或官方代码仓库写明时才填，"—"表示只有预印本或没找到。每节按首版日期排序。"做了什么"是 Claude 根据摘要写的一句话，读原文时请核对。
 > - 18 篇已在其他专题下载过，链接栏直接指向那份；其余 85 篇的 PDF 在 `topics/papers/无人机VLN/`，文件名开头的"节号-序号"和表格顺序一致；下载的是 2026-11-05 时 arXiv 上的最新版本，只存在本地，不进 git。
+> - 2026-11-28 补充 VLN-AR（高飞组）和 AeroRSI，编号接在第三节末尾（3-58、3-59），表格内仍按小节和日期排列。
 
 ## 建议的阅读顺序
 
@@ -35,7 +36,7 @@ updated: 2026-11-05
 |---|---|
 | [[#一、基准、数据集与平台]] | 29 |
 | [[#二、相关任务：目标搜索、问答与空地协同]] | 11 |
-| [[#三、方法]] | 57 |
+| [[#三、方法]] | 59 |
 | [[#四、同时支持无人机的通用导航模型]] | 2 |
 | [[#五、综述]] | 4 |
 | [[#六、各基准使用的场景]] | — |
@@ -181,6 +182,7 @@ updated: 2026-11-05
 | 2026-08 | [**AeroDPO**](https://arxiv.org/abs/2608.07557)<br>Unleashing Lightweight UAV Navigation with High-Fidelity Perception and Automated Preference Optimization | — | 无人机碰撞时回滚仿真状态，以出错动作为负样本、特权干预合成的避碰动作为正样本，自动构建偏好数据做 DPO。 | AeroDPO boosts success rates to 49.16% on unmapped scenarios while drastically suppressing collision rates | [[topics/papers/递归自我改进RSI/1-21_2608.07557_AeroDPO.pdf\|PDF]]（RSI 专题） · [代码](https://github.com/XuPeng23/AeroDPO) |
 | 2026-08 | [**RefineFly**](https://arxiv.org/abs/2608.09467)<br>Failure-Aware Post-Training for Aerial Vision-Language Navigation | — | 端到端UAV-VLA的失败感知RL后训练：token级PPO、两阶段场景课程中的动态失败记忆，以及参考正则防漂移。 | improving success rate over AerialVLA by 3.12 to 8.37 percentage points with a total rollout budget of about 30% of the training-set size (TravelUAV) | [[topics/papers/无人机VLN/3-46_2608.09467_RefineFly.pdf\|PDF]] |
 | 2026-10 | [**X-Fly**](https://arxiv.org/abs/2610.21450)<br>Learning to Reach and Stop in Full-Chunk Aerial Vision-Language Navigation | — | 整块执行动作的空中VLN：Recovery DAgger标注恢复与停止，再用Flow-GRPO联合优化动作块与停止策略。 | X-Fly reaches 74.18% SR on test-seen and 51.73% on test-unseen | [[topics/papers/无人机VLN/3-47_2610.21450_X-Fly.pdf\|PDF]] · [主页](https://juliusju572.github.io/x-fly/) |
+| 2026-11 | [**AeroRSI**](https://arxiv.org/abs/2611.24077)<br>Recursive Self-Improvement for Aerial Vision-Language Navigation | — | 无人机 VLA 策略的递归自我改进：从自己闭环飞行失败的地方采样修复动作，用"能否接着飞完"自我验证后蒸馏回策略，不需要额外人工标注。 | On TravelUAV, three rounds raise SR of a supervised 2B policy from 46.4% to 67.5%, halving collisions; +10.6 points over the previous SOTA | [[topics/papers/无人机VLN/3-59_2611.24077_AeroRSI.pdf\|PDF]] · [代码](https://github.com/starsholic/AeroRSI) · [主页](https://starsholic.github.io/AeroRSI/) |
 
 ### 机载与真机部署
 
@@ -195,6 +197,7 @@ updated: 2026-11-05
 | 2026-10 | [**LightVLN**](https://arxiv.org/abs/2610.05024)<br>Efficient Aerial Vision-and-Language Navigation with Compact Memory and History-Guided Local Aggregation | — | 轻量空中VLN：0.5B语言骨干，每帧历史压成1个token、当前观测压到32个token，可机载实时运行。 | 50.93% Test-Seen and 36.14% Test-Unseen SR on OpenFly; 25.83% SR on AerialVLN-S Val-Seen; 14.61 Hz model inference onboard | [[topics/papers/无人机VLN/3-54_2610.05024_LightVLN.pdf\|PDF]] |
 | 2026-10 | [**AeroDASH**](https://arxiv.org/abs/2610.25407)<br>Asynchronous Vision-Language-Action Control for Continuous UAV Flight | — | 异步VLA连续飞行：B样条策略输出连续参考，轨迹融合剔除推理期间过期前缀，再用执行感知GRPO微调。 | On the UAV-Flow test set, AeroDASH achieves a success rate of 76.56%, exceeding OpenVLA-UAV and AeroDASH w/o GRPO by 38.1 and 20.1 percentage points | [[topics/papers/无人机VLN/3-55_2610.25407_AeroDASH.pdf\|PDF]] |
 | 2026-10 | [**OpenFlyV2**](https://arxiv.org/abs/2610.39287)<br>An onboard vision-language-action model for aerial perception and navigation | — | 统一机载VLA：共享视觉-语言表示兼顾语义理解、指代感知、空间推理与连续控制，Orin NX上10Hz输出航点块。 | 48% navigation success rate across four real-world environments; action chunks generated onboard at 10 Hz on Jetson Orin NX | [[topics/papers/无人机VLN/3-56_2610.39287_OpenFlyV2.pdf\|PDF]] · [代码](https://github.com/Ideal-ljl/AeroBrain) |
+| 2026-11 | [**VLN-AR**](https://arxiv.org/abs/2611.23930)<br>A Hierarchical Onboard Vision-Language-Navigation Framework for Aerial Robots in Complex Environments | IEEE T-RO（已接收） | 浙大高飞组（FAST Lab）与 Differential Robotics：分层式无人机 VLN，多模态推理输出 3D 位姿指令与导航意图，再转为动力学可行的动作；用 3DGS 重建自动造数据、三阶段训练、记忆感知的任务分解，并做机载轻量化。 | 7.1x-9.4x speedup while maintaining high navigation performance on resource-limited UAV platforms | [[topics/papers/无人机VLN/3-58_2611.23930_VLN-AR.pdf\|PDF]] · [主页](https://wyz000.github.io/VLN-AR/) |
 
 ### 其他
 
