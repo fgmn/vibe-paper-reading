@@ -136,3 +136,22 @@ views:
     sort:
       - property: id
         direction: ASC
+  - type: table
+    name: JEPA系列
+    filters:
+      and:
+        - note.org == "专题·JEPA系列"
+    groupBy:
+      property: category
+      direction: ASC
+    order:
+      - id
+      - short
+      - date
+      - venue
+      - status
+      - rating
+      - pdf
+    sort:
+      - property: id
+        direction: ASC
